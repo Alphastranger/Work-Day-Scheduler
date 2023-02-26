@@ -1,6 +1,25 @@
+let container = $('#container')
+let saveButtons = {
+  nineAm: $('#hour-9'),
+  tenAm: $('#hour-10'),
+  elevenAm: $('#hour-11'),
+  twelvePm: $('#hour-12'),
+  onePm: $('#hour-1'),
+  twoPm: $('#hour-2'),
+  threePm: $('#hour-3'),
+  fourPm: $('#hour-4'),
+  fivePm: $('#hour-5')
+}
+let todaysDate = dayjs();
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
+container.children().on('click', function() {
+  alert("Hello")
+})
+saveButtons.nineAm.on('click', function () {
+  
+})
 $(function () {
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
@@ -20,4 +39,7 @@ $(function () {
   // attribute of each time-block be used to do this?
   //
   // TODO: Add code to display the current date in the header of the page.
-});
+})
+setInterval(function() {
+  $('#currentDay').text(todaysDate.format('MMM D, YYYY hh:mm:ss a'))
+}, 1000)
