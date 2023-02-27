@@ -47,8 +47,8 @@ function savetoStorage(){
   saveData.push(inputName);
   saveTextData(inputName);
 }
-// hours.nineAm.button.click(savetoStorage);
-console.log(hourText.textTen)
+hours.nineAm.click(savetoStorage);
+console.log(hourText.textTen.value)
 
 //Hour change functions//
 
