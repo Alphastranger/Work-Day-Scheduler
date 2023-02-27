@@ -17,15 +17,15 @@ var hours = {
   fivePm: $('#hour-5')
 }
 var hourText = {
-  textNine: $('#text9'),
-  textTen: $('#text10'),
-  textEleven: $('#text11'),
-  textTwelve: $('#text12'),
-  textOne: $('#text1'),
-  textTwo: $('#text2'),
-  textThree: $('#text3'),
-  textFour: $('#text4'),
-  textFive: $('#text5')
+  textNine: $('#text9.value'),
+  textTen: $('#text10.value'),
+  textEleven: $('#text11.value'),
+  textTwelve: $('#text12.value'),
+  textOne: $('#text1.value'),
+  textTwo: $('#text2.value'),
+  textThree: $('#text3.value'),
+  textFour: $('#text4.value'),
+  textFive: $('#text5.value')
 }
 //Save data functions//
 
@@ -38,7 +38,7 @@ function saveTextData(){
 }
 
 function printfromStorage(){
-  description.empty();
+  container.description.empty();
   var saveData = readfromStorage();
 }
 function savetoStorage(){
@@ -48,7 +48,7 @@ function savetoStorage(){
   saveTextData(inputName);
 }
 hours.nineAm.click(savetoStorage);
-console.log(hourText.textTen.value)
+console.log(hourText.tenText)
 
 //Hour change functions//
 
