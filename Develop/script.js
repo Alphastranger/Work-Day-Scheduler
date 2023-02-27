@@ -1,3 +1,6 @@
+$(function () {
+//variables//
+
 let container = $('#container')
 let description = $('<textarea>')
 var hours = {
@@ -11,30 +14,24 @@ var hours = {
   fourPm: $('#hour-4'),
   fivePm: $('#hour-5')
 }
-$(function appointMent() {
+//Save data functions//
+
+function appointMent() {
 var saveData = localStorage.getItem("appointments")
 if (saveData){
   saveData = JSON.parse(saveData);
 }
-else {
-  saveData = [];
-}
 return saveData;
-})
+}
 
-$(function saveTextData(){
+function saveTextData(){
   localStorage.setItem("appointments", JSON.stringify(saveData));
-})
+}
 
-$(function datafromStorage(){
+function datafromStorage(){
   description.empty();
   var saveData = appointMent();
-
-})
-// Wrap all code that interacts with the DOM in a call to jQuery to ensure that
-// the code isn't run until the browser has finished rendering all the elements
-// in the html.
-
+}
 // container.children().ready(function() {
 //   $('button').click (function() {
 //   localStorage.setItem("appointments", saveData)
@@ -46,8 +43,11 @@ $(function datafromStorage(){
 //   alert("butt")
 // })
 // })
+
+//Hour change functions//
+
 let currentHour = dayjs().startOf('hour');
-$(function calendarColor(){
+function calendarColor(){
   if (currentHour.isSame(dayjs().hour(09))){
     hours.nineAm.addClass('.present');
     hours.nineAm.remove('.past');
@@ -58,8 +58,7 @@ $(function calendarColor(){
     hours.nineAm.addClass('.future');
     hours.nineAm.remove('.past');
   }
-})
-$(function () {
+}
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
   // local storage. HINT: What does `this` reference in the click listener
@@ -78,8 +77,11 @@ $(function () {
   // attribute of each time-block be used to do this?
   //
   // TODO: Add code to display the current date in the header of the page.
-})
+
+  //Calendar function//
+
 let todaysDate = dayjs();
 setInterval(function() {
   let updateDate = $('#currentDay').text(todaysDate.format('MMM D, YYYY hh:mm:ss a'))
 }, 1000)
+})
