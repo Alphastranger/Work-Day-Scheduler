@@ -1,8 +1,10 @@
 $(function () {
+
 //variables//
 
 let container = $('#container')
 let description = $('<textarea>')
+let button = $('<button>')
 var hours = {
   nineAm: $('#hour-9'),
   tenAm: $('#hour-10'),
@@ -14,35 +16,39 @@ var hours = {
   fourPm: $('#hour-4'),
   fivePm: $('#hour-5')
 }
+var hourText = {
+  textNine: $('#text9'),
+  textTen: $('#text10'),
+  textEleven: $('#text11'),
+  textTwelve: $('#text12'),
+  textOne: $('#text1'),
+  textTwo: $('#text2'),
+  textThree: $('#text3'),
+  textFour: $('#text4'),
+  textFive: $('#text5')
+}
 //Save data functions//
 
-function appointMent() {
+function readfromStorage() {
 var saveData = localStorage.getItem("appointments")
-if (saveData){
-  saveData = JSON.parse(saveData);
-}
 return saveData;
 }
-
 function saveTextData(){
-  localStorage.setItem("appointments", JSON.stringify(saveData));
+  localStorage.setItem("appointments", saveData);
 }
 
-function datafromStorage(){
+function printfromStorage(){
   description.empty();
-  var saveData = appointMent();
+  var saveData = readfromStorage();
 }
-// container.children().ready(function() {
-//   $('button').click (function() {
-//   localStorage.setItem("appointments", saveData)
-// })
-// })
-
-// hours.nineAm.ready(function() {
-//   $('button').click (function(){
-//   alert("butt")
-// })
-// })
+function savetoStorage(){
+  var inputName = hours.nineAm.description.val();
+  var saveData = readfromStorage();
+  saveData.push(inputName);
+  saveTextData(inputName);
+}
+// hours.nineAm.button.click(savetoStorage);
+console.log(hourText.textTen)
 
 //Hour change functions//
 
