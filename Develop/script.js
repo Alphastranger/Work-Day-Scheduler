@@ -1,5 +1,5 @@
 let container = $('#container')
-let description = $('.description')
+let description = $('<textarea>')
 var hours = {
   nineAm: $('#hour-9'),
   tenAm: $('#hour-10'),
@@ -13,37 +13,52 @@ var hours = {
 }
 $(function appointMent() {
 var saveData = localStorage.getItem("appointments")
-hours.nineAm.value = saveData;
+if (saveData){
+  saveData = JSON.parse(saveData);
+}
+else {
+  saveData = [];
+}
+return saveData;
 })
-var saveData = container.value
 
+$(function saveTextData(){
+  localStorage.setItem("appointments", JSON.stringify(saveData));
+})
+
+$(function datafromStorage(){
+  description.empty();
+  var saveData = appointMent();
+
+})
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
-container.children().ready(function() {
-  $('button').click (function() {
-  localStorage.setItem("appointments", saveData)
-})
-})
+
+// container.children().ready(function() {
+//   $('button').click (function() {
+//   localStorage.setItem("appointments", saveData)
+// })
+// })
+
 // hours.nineAm.ready(function() {
 //   $('button').click (function(){
 //   alert("butt")
 // })
 // })
-$(function nineOclock(){
-  if (dayjs().hour(9)===true){
-    hours.nineAm.remove('.past')
-    hours.nineAm.remove('.future')
-    hours.nineAm.attr('.present')
-  } else if (dayjs().hour(10)===true){
-    hours.nineAm.remove('present')
-    hours.nineAm.attr('.past')
-  } else if (dayjs().hour(0)===true){
-    hours.nineAm.remove('.past')
-    hours.nineAm.attr('.future')
+let currentHour = dayjs().startOf('hour');
+$(function calendarColor(){
+  if (currentHour.isSame(dayjs().hour(09))){
+    hours.nineAm.addClass('.present');
+    hours.nineAm.remove('.past');
+  } else if (currentHour.isAfter(dayjs().hour(09))){
+    hours.nineAm.addClass('.past');
+    hours.nineAm.remove('.present');
+  } else if (currentHour.isBefore(dayjs().hour(09))){
+    hours.nineAm.addClass('.future');
+    hours.nineAm.remove('.past');
   }
 })
-nineOclock()
 $(function () {
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
