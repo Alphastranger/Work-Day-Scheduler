@@ -1,5 +1,6 @@
 let container = $('#container')
-let saveButtons = {
+let description = $('.description')
+var hours = {
   nineAm: $('#hour-9'),
   tenAm: $('#hour-10'),
   elevenAm: $('#hour-11'),
@@ -10,16 +11,39 @@ let saveButtons = {
   fourPm: $('#hour-4'),
   fivePm: $('#hour-5')
 }
-let todaysDate = dayjs();
+$(function appointMent() {
+var saveData = localStorage.getItem("appointments")
+hours.nineAm.value = saveData;
+})
+var saveData = container.value
+
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
-container.children().on('click', function() {
-  alert("Hello")
+container.children().ready(function() {
+  $('button').click (function() {
+  localStorage.setItem("appointments", saveData)
 })
-saveButtons.nineAm.on('click', function () {
-  
 })
+// hours.nineAm.ready(function() {
+//   $('button').click (function(){
+//   alert("butt")
+// })
+// })
+$(function nineOclock(){
+  if (dayjs().hour(9)===true){
+    hours.nineAm.remove('.past')
+    hours.nineAm.remove('.future')
+    hours.nineAm.attr('.present')
+  } else if (dayjs().hour(10)===true){
+    hours.nineAm.remove('present')
+    hours.nineAm.attr('.past')
+  } else if (dayjs().hour(0)===true){
+    hours.nineAm.remove('.past')
+    hours.nineAm.attr('.future')
+  }
+})
+nineOclock()
 $(function () {
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
@@ -40,6 +64,7 @@ $(function () {
   //
   // TODO: Add code to display the current date in the header of the page.
 })
+let todaysDate = dayjs();
 setInterval(function() {
-  $('#currentDay').text(todaysDate.format('MMM D, YYYY hh:mm:ss a'))
+  let updateDate = $('#currentDay').text(todaysDate.format('MMM D, YYYY hh:mm:ss a'))
 }, 1000)
