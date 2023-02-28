@@ -28,26 +28,33 @@ var hourText = {
 }
 //Save data functions//
 
-function readfromStorage() {
-var saveData = localStorage.getItem("appointments")
-return saveData;
-}
-function saveTextData(){
-var saveData = localStorage.setItem("appointments", saveData);
-  savetoStorage()
-}
+// function readfromStorage() {
+// var saveData = localStorage.getItem("appointments")
+// return saveData;
+// }
+// function saveTextData(){
+// var saveData = localStorage.setItem("appointments", saveData);
+//   savetoStorage()
+// }
 
-function printfromStorage(){
-  hourText.textTen.empty();
-  readfromStorage();
+// function printfromStorage(){
+//   hourText.textTen.empty();
+//   readfromStorage();
+// }
+// function savetoStorage(){
+//   var inputName = hourText.textTen;
+//   var saveData = readfromStorage();
+//   saveData.push(inputName);
+//   saveTextData(inputName);
+// }
+hours.tenAm.children('button').click(function savetoStorage() {
+  localStorage.setItem("appointments", hourText.textTen)
+});
+function pullFromStorage(){
+var saveData = localStorage.getItem("appointments")
+hourText.textTen.text(saveData.value);
 }
-function savetoStorage(){
-  var inputName = hourText.textTen;
-  var saveData = readfromStorage();
-  saveData.push(inputName);
-  saveTextData(inputName);
-}
-hours.tenAm.children('button').click(saveTextData);
+pullFromStorage
 // hours.tenAm.children('button').click(function(){
 //   alert('hello')
 // })
@@ -56,6 +63,13 @@ hours.tenAm.children('button').click(saveTextData);
 console.log(hourText.textTen)
 
 //Hour change functions//
+
+// TODO: Add code to apply the past, present, or future class to each time
+  // block by comparing the id to the current hour. HINTS: How can the id
+  // attribute of each time-block be used to conditionally add or remove the
+  // past, present, and future classes? How can Day.js be used to get the
+  // current hour in 24-hour time?
+  //
 
 function calendarColor(){
   let currentHour = dayjs().startOf('hour');
@@ -70,7 +84,7 @@ function calendarColor(){
     hours.nineAm.remove('.past');
   }
 }
-calendarColor();
+calendarColor;
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
   // local storage. HINT: What does `this` reference in the click listener
@@ -78,17 +92,11 @@ calendarColor();
   // time-block containing the button that was clicked? How might the id be
   // useful when saving the description in local storage?
   //
-  // TODO: Add code to apply the past, present, or future class to each time
-  // block by comparing the id to the current hour. HINTS: How can the id
-  // attribute of each time-block be used to conditionally add or remove the
-  // past, present, and future classes? How can Day.js be used to get the
-  // current hour in 24-hour time?
-  //
+ 
   // TODO: Add code to get any user input that was saved in localStorage and set
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
   //
-  // TODO: Add code to display the current date in the header of the page.
 
   //Calendar function//
 
