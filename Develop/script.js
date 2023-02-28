@@ -3,7 +3,6 @@ $(function () {
 //variables//
 
 let container = $('#container')
-let description = $('<textarea>')
 let button = $(':button')
 var hours = {
   nineAm: $('#hour-9'),
@@ -34,28 +33,32 @@ var saveData = localStorage.getItem("appointments")
 return saveData;
 }
 function saveTextData(){
-  localStorage.setItem("appointments", saveData);
+var saveData = localStorage.setItem("appointments", saveData);
+  savetoStorage()
 }
 
 function printfromStorage(){
-  container.description.empty();
-  var saveData = readfromStorage();
+  hourText.textTen.empty();
+  readfromStorage();
 }
 function savetoStorage(){
-  var inputName = hourText.textNine;
+  var inputName = hourText.textTen;
   var saveData = readfromStorage();
   saveData.push(inputName);
   saveTextData(inputName);
 }
-button.click(savetoStorage);
+hours.tenAm.children('button').click(saveTextData);
+// hours.tenAm.children('button').click(function(){
+//   alert('hello')
+// })
 
 //Test Zone//
 console.log(hourText.textTen)
 
 //Hour change functions//
 
-let currentHour = dayjs().startOf('hour');
 function calendarColor(){
+  let currentHour = dayjs().startOf('hour');
   if (currentHour.isSame(dayjs().hour(09))){
     hours.nineAm.addClass('.present');
     hours.nineAm.remove('.past');
@@ -67,7 +70,7 @@ function calendarColor(){
     hours.nineAm.remove('.past');
   }
 }
-calendarColor;
+calendarColor();
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
   // local storage. HINT: What does `this` reference in the click listener
