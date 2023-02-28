@@ -104,12 +104,6 @@ fourEl.innerHTML=saveData16;
 fiveEl.innerHTML=saveData17;
 }
 pullFromStorage()
-// hours.tenAm.children('button').click(function(){
-//   alert('hello')
-// })
-
-//Test Zone//
-
 
 //Hour change functions//
 
@@ -128,20 +122,22 @@ function calendarColor(){
   console.log(currentHour)
   $('.time-block').each(function() {
     var blockHour = parseInt($(this).attr('id').split('-')[1])
+    console.log(blockHour)
+    let hourNumber = $(this).attr('id').match(blockHour)
+    let hourSignifier = $('#hour-' + hourNumber)
+    console.log(hourSignifier)
+    console.log(hourNumber)
+    if (currentHour === blockHour){
+      hourSignifier.addClass('.present');
+      hourSignifier.remove('.past');
+   } else if (currentHour>blockHour){
+      hourSignifier.addClass('.past');
+      hourSignifier.remove('.present');
+   } else if (currentHour<blockHour){
+     hourSignifier.addClass('.future');
+      hourSignifier.remove('.past');
+   }
   })
-  for (i=0; i<hours.length; i++){
-    var blockHour = parseInt(hours[i].attr('id').split('-')[1])
-  if (currentHour === blockHour){
-    hours[i].addClass('.present');
-    hours[i].remove('.past');
-  } else if (currentHour>blockHour){
-    hours[i].addClass('.past');
-    hours[i].remove('.present');
-  } else if (currentHour<blockHour){
-    hours[i].addClass('.future');
-    hours[i].remove('.past');
-  }
-}
 }
 calendarColor();
   // TODO: Add a listener for click events on the save button. This code should
