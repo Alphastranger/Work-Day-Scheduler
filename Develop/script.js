@@ -4,7 +4,7 @@ $(function () {
 
 let container = $('#container')
 let description = $('<textarea>')
-let button = $('<button>')
+let button = $(':button')
 var hours = {
   nineAm: $('#hour-9'),
   tenAm: $('#hour-10'),
@@ -17,15 +17,15 @@ var hours = {
   fivePm: $('#hour-5')
 }
 var hourText = {
-  textNine: $('#text9.value'),
-  textTen: $('#text10.value'),
-  textEleven: $('#text11.value'),
-  textTwelve: $('#text12.value'),
-  textOne: $('#text1.value'),
-  textTwo: $('#text2.value'),
-  textThree: $('#text3.value'),
-  textFour: $('#text4.value'),
-  textFive: $('#text5.value')
+  textNine: $('#text9').val(),
+  textTen: $('#text10').val(),
+  textEleven: $('#text11').val(),
+  textTwelve: $('#text12').val(),
+  textOne: $('#text1').val(),
+  textTwo: $('#text2').val(),
+  textThree: $('#text3').val(),
+  textFour: $('#text4').val(),
+  textFive: $('#text5').val()
 }
 //Save data functions//
 
@@ -42,13 +42,15 @@ function printfromStorage(){
   var saveData = readfromStorage();
 }
 function savetoStorage(){
-  var inputName = hours.nineAm.description.val();
+  var inputName = hourText.textNine;
   var saveData = readfromStorage();
   saveData.push(inputName);
   saveTextData(inputName);
 }
-hours.nineAm.click(savetoStorage);
-console.log(hourText.tenText)
+button.click(savetoStorage);
+
+//Test Zone//
+console.log(hourText.textTen)
 
 //Hour change functions//
 
@@ -65,6 +67,7 @@ function calendarColor(){
     hours.nineAm.remove('.past');
   }
 }
+calendarColor;
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
   // local storage. HINT: What does `this` reference in the click listener
@@ -86,8 +89,9 @@ function calendarColor(){
 
   //Calendar function//
 
-let todaysDate = dayjs();
 setInterval(function() {
-  let updateDate = $('#currentDay').text(todaysDate.format('MMM D, YYYY hh:mm:ss a'))
+  let todaysDate = dayjs();
+  let timeNow =todaysDate.format('MMM D, YYYY hh:mm:ss a')
+  $('#currentDay').text(timeNow)
 }, 1000)
 })
