@@ -2,19 +2,17 @@ $(function () {
 
 //variables//
 
-let container = $('#container')
-let button = $(':button')
-var hours = {
-  nineAm: $('#hour-9'),
-  tenAm: $('#hour-10'),
-  elevenAm: $('#hour-11'),
-  twelvePm: $('#hour-12'),
-  onePm: $('#hour-1'),
-  twoPm: $('#hour-2'),
-  threePm: $('#hour-3'),
-  fourPm: $('#hour-4'),
-  fivePm: $('#hour-5')
-}
+var hours = []
+  hours[0] = $('#hour-9'),
+  hours[1] = $('#hour-10'),
+  hours[2] = $('#hour-11'),
+  hours[3] = $('#hour-12'),
+  hours[4] = $('#hour-1'),
+  hours[5] = $('#hour-2'),
+  hours[6] = $('#hour-3'),
+  hours[7] = $('#hour-4'),
+  hours[8] = $('#hour-5')
+
 var hourText = {
   textNine: $('#text9').val(),
   textTen: $('#text10').val(),
@@ -26,41 +24,92 @@ var hourText = {
   textFour: $('#text4').val(),
   textFive: $('#text5').val()
 }
+
 //Save data functions//
 
-// function readfromStorage() {
-// var saveData = localStorage.getItem("appointments")
-// return saveData;
-// }
-// function saveTextData(){
-// var saveData = localStorage.setItem("appointments", saveData);
-//   savetoStorage()
-// }
-
-// function printfromStorage(){
-//   hourText.textTen.empty();
-//   readfromStorage();
-// }
-// function savetoStorage(){
-//   var inputName = hourText.textTen;
-//   var saveData = readfromStorage();
-//   saveData.push(inputName);
-//   saveTextData(inputName);
-// }
-hours.tenAm.children('button').click(function savetoStorage() {
-  localStorage.setItem("appointments", hourText.textTen)
+console.log(hourText.textTen)
+hours[0].children('button').click(function savetoStorage() {
+  var nineEl = document.getElementById('text9');
+  var inputEl = nineEl.value
+  localStorage.setItem("9:00 AM", inputEl)
+});
+hours[1].children('button').click(function savetoStorage() {
+  var tenEl = document.getElementById('text10');
+  var inputEl = tenEl.value
+  localStorage.setItem("10:00 AM", inputEl)
+});
+hours[2].children('button').click(function savetoStorage() {
+  var elevenEl = document.getElementById('text11');
+  var inputEl = elevenEl.value
+  localStorage.setItem("11:00 AM", inputEl)
+});
+hours[3].children('button').click(function savetoStorage() {
+  var twelveEl = document.getElementById('text12');
+  var inputEl = twelveEl.value
+  localStorage.setItem("12:00 PM", inputEl)
+});
+hours[4].children('button').click(function savetoStorage() {
+  var oneEl = document.getElementById('text1');
+  var inputEl = oneEl.value
+  localStorage.setItem("1:00 PM", inputEl)
+});
+hours[5].children('button').click(function savetoStorage() {
+  var twoEl = document.getElementById('text2');
+  var inputEl = twoEl.value
+  localStorage.setItem("2:00 PM", inputEl)
+});
+hours[6].children('button').click(function savetoStorage() {
+  var threeEl = document.getElementById('text3');
+  var inputEl = threeEl.value
+  localStorage.setItem("3:00 PM", inputEl)
+});
+hours[7].children('button').click(function savetoStorage() {
+  var fourEl = document.getElementById('text4');
+  var inputEl = fourEl.value
+  localStorage.setItem("4:00 PM", inputEl)
+});
+hours[8].children('button').click(function savetoStorage() {
+  var fiveEl = document.getElementById('text5');
+  var inputEl = fiveEl.value
+  localStorage.setItem("5:00 PM", inputEl)
 });
 function pullFromStorage(){
-var saveData = localStorage.getItem("appointments")
-hourText.textTen.text(saveData.value);
+  var nineEl = document.getElementById('text9');
+  var tenEl = document.getElementById('text10');
+  var elevenEl = document.getElementById('text11');
+  var twelveEl = document.getElementById('text12');
+  var oneEl = document.getElementById('text1');
+  var twoEl = document.getElementById('text2');
+  var threeEl = document.getElementById('text3');
+  var fourEl = document.getElementById('text4');
+  var fiveEl = document.getElementById('text5');
+var saveData9 = localStorage.getItem('9:00 AM')
+var saveData10 = localStorage.getItem("10:00 AM")
+var saveData11 = localStorage.getItem("11:00 AM")
+var saveData12 = localStorage.getItem("12:00 PM")
+var saveData13 = localStorage.getItem("1:00 PM")
+var saveData14 = localStorage.getItem("2:00 PM")
+var saveData15 =localStorage.getItem("3:00 PM")
+var saveData16 = localStorage.getItem("4:00 PM")
+var saveData17 =localStorage.getItem("5:00 PM")
+console.log(saveData10)
+nineEl.innerHTML=saveData9;
+tenEl.innerHTML=saveData10;
+elevenEl.innerHTML=saveData11;
+twelveEl.innerHTML=saveData12;
+oneEl.innerHTML=saveData13;
+twoEl.innerHTML=saveData14;
+threeEl.innerHTML=saveData15;
+fourEl.innerHTML=saveData16;
+fiveEl.innerHTML=saveData17;
 }
-pullFromStorage
+pullFromStorage()
 // hours.tenAm.children('button').click(function(){
 //   alert('hello')
 // })
 
 //Test Zone//
-console.log(hourText.textTen)
+
 
 //Hour change functions//
 
@@ -71,20 +120,30 @@ console.log(hourText.textTen)
   // current hour in 24-hour time?
   //
 
+// $('.time-block').each(function() {
+//   var blockHour = parseInt($(this).attr('id'.split('-')[1]))
+// })
 function calendarColor(){
-  let currentHour = dayjs().startOf('hour');
-  if (currentHour.isSame(dayjs().hour(09))){
-    hours.nineAm.addClass('.present');
-    hours.nineAm.remove('.past');
-  } else if (currentHour.isAfter(dayjs().hour(09))){
-    hours.nineAm.addClass('.past');
-    hours.nineAm.remove('.present');
-  } else if (currentHour.isBefore(dayjs().hour(09))){
-    hours.nineAm.addClass('.future');
-    hours.nineAm.remove('.past');
+  let currentHour = dayjs().hour();
+  console.log(currentHour)
+  $('.time-block').each(function() {
+    var blockHour = parseInt($(this).attr('id').split('-')[1])
+  })
+  for (i=0; i<hours.length; i++){
+    var blockHour = parseInt(hours[i].attr('id').split('-')[1])
+  if (currentHour === blockHour){
+    hours[i].addClass('.present');
+    hours[i].remove('.past');
+  } else if (currentHour>blockHour){
+    hours[i].addClass('.past');
+    hours[i].remove('.present');
+  } else if (currentHour<blockHour){
+    hours[i].addClass('.future');
+    hours[i].remove('.past');
   }
 }
-calendarColor;
+}
+calendarColor();
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
   // local storage. HINT: What does `this` reference in the click listener
