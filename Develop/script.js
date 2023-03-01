@@ -7,11 +7,11 @@ var hours = []
   hours[1] = $('#hour-10'),
   hours[2] = $('#hour-11'),
   hours[3] = $('#hour-12'),
-  hours[4] = $('#hour-1'),
-  hours[5] = $('#hour-2'),
-  hours[6] = $('#hour-3'),
-  hours[7] = $('#hour-4'),
-  hours[8] = $('#hour-5')
+  hours[4] = $('#hour-13'),
+  hours[5] = $('#hour-14'),
+  hours[6] = $('#hour-15'),
+  hours[7] = $('#hour-16'),
+  hours[8] = $('#hour-17')
 
 var hourText = {
   textNine: $('#text9').val(),
@@ -123,19 +123,20 @@ function calendarColor(){
   $('.time-block').each(function() {
     var blockHour = parseInt($(this).attr('id').split('-')[1])
     console.log(blockHour)
-    let hourNumber = $(this).attr('id').match(blockHour)
-    let hourSignifier = $('#hour-' + hourNumber)
+    let hourSignifier = $(this).children('.description')
     console.log(hourSignifier)
-    console.log(hourNumber)
     if (currentHour === blockHour){
-      hourSignifier.addClass('.present');
-      hourSignifier.remove('.past');
+      hourSignifier.removeClass('past')
+      hourSignifier.addClass('present');
+      hourSignifier.removeClass('future');
    } else if (currentHour>blockHour){
-      hourSignifier.addClass('.past');
-      hourSignifier.remove('.present');
-   } else if (currentHour<blockHour){
-     hourSignifier.addClass('.future');
-      hourSignifier.remove('.past');
+    // hourSignifier.removeClass('.future')
+      hourSignifier.addClass('past');
+      hourSignifier.removeClass('present');
+   } else {
+    hourSignifier.removeClass('present')
+     hourSignifier.addClass('future');
+      hourSignifier.removeClass('past');
    }
   })
 }
