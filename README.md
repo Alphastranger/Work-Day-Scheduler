@@ -9,4 +9,4 @@ a setinterval function.
 
 Website Link: https://alphastranger.github.io/Work-Day-Scheduler/
 
-![alt text](./Develop/images/Screenshot.png)
+![alt text](./images/Screenshot.png)
